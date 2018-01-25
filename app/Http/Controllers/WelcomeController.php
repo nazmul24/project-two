@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Blog;
 use Illuminate\Http\Request;
 
 class WelcomeController extends Controller
 {
     public function index(){
-    	return view('front.home.home-content');
+        //$blogs = Blog::where('publication_status', 1)->get();
+        $blogs = Blog::where('publication_status', 1)->paginate(3);
+    	return view('front.home.home-content', ['blogs' => $blogs]);
     }
 
     public function support(){
